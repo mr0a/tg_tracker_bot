@@ -10,7 +10,7 @@ async def bitcoivaTrack(symbol, alert_price, chat_id):
     to_time = round(time.time())    # Now
     print("Symbol", symbol)
     async with aiohttp.ClientSession(base_url='https://chart.bitcoiva.com') as session:
-        response = await session.get(f'/tradeChart/chart/history?symbol={symbol}&resolution={1}&from={from_time}&to={to_time}')
+        response = await session.get(f'/tradeChart/chart/history?symbol={symbol}&resolution={5}&from={from_time}&to={to_time}')
         content = (await response.content.read()).decode()
         json_data = json.loads(content)
         pprint.pprint(json_data)

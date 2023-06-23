@@ -8,7 +8,7 @@ from aiogram.types import Message
 from models import User, Trackers
 import dataProviders
 from scheduler import scheduler
-from bot import botApp
+from bot import botApp, send_message
 
 
 logging.basicConfig(
@@ -66,7 +66,7 @@ async def start_handler(message: Message) -> None:
         return await message.answer("Run /start first!")
     func = getattr(dataProviders, args[1])
     data = await func(*args[2:])
-    await message.reply('The following is the latest data:' + json.dumps(data, indent=4))
+    await send_message(message.from_user.id, 'The following is the latest data:' + json.dumps(data, indent=4))
 
 
 @router.message(Command(commands=['list']))

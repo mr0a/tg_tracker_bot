@@ -139,4 +139,5 @@ async def main():
     await dispatcher.start_polling(botApp)
 
 
-run_async(main())
+if __name__ == "__main__":
+    run_async(main())

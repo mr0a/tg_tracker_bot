@@ -59,7 +59,7 @@ async def start_handler(message: Message) -> None:
     if len(args) < 2:
         await message.answer("To get data by calling a function give in below format!")
         await message.answer('/getdata getBitcoivaData BDX_INR')
-        await message.answer('I will send the output of the given function with following values as argument')
+        return await message.answer('I will send the output of the given function with following values as argument')
 
     user = await User.get_or_none(chat_id=message.from_user.id)
     if not user:

@@ -3,3 +3,4 @@ apscheduler
 tortoise-orm
 sqlalchemy
 psycopg2-binary
+asyncpg

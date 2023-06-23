@@ -119,7 +119,8 @@ async def pause_handler(message: Message):
 @router.message()
 async def init_db():
     await Tortoise.init(
-        db_url=os.environ.get('DATABASE_URL'),
+        db_url=os.environ.get('DATABASE_URL').replace(
+            'postgres', 'postgresql'),
         modules={'models': ['models']}
     )
     await Tortoise.generate_schemas()

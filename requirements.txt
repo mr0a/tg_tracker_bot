@@ -2,3 +2,4 @@ aiogram==3.0.0b7
 apscheduler
 tortoise-orm
 sqlalchemy
+psycopg2-binary

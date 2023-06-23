@@ -1,3 +1,4 @@
+import json
 from tortoise import Tortoise, run_async
 import logging
 import os
@@ -50,6 +51,22 @@ async def start_handler(message: Message) -> None:
     scheduler.add_job(func, id=args[1] + args[4], trigger='cron', minute=f'*/{minutes}', args=(tracker.token_name, tracker.price_tick,
                                                                                                user.chat_id))
     await message.reply('I am tracking it for you!')
+
+
+@router.message(Command(commands=['getdata']))
+async def start_handler(message: Message) -> None:
+    args = message.text.split()
+    if len(args) < 2:
+        await message.answer("To get data by calling a function give in below format!")
+        await message.answer('/getdata getBitcoivaData BDX_INR')
+        await message.answer('I will send the output of the given function with following values as argument')
+
+    user = await User.get_or_none(chat_id=message.from_user.id)
+    if not user:
+        return await message.answer("Run /start first!")
+    func = getattr(dataProviders, args[1])
+    data = await func(*args[2:])
+    await message.reply('The following is the latest data:' + json.dumps(data, indent=4))
 
 
 @router.message(Command(commands=['list']))

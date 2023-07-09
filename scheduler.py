@@ -6,9 +6,11 @@ from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 # from apscheduler.executors.asyncio import AsyncIOExecutor
 
 
+db_url = os.environ.get(
+    'DATABASE_URL', 'sqlite:///scheduler.sqlite')
 jobstores = {
     # 'mongo': {'type': 'mongodb'},
-    'default': SQLAlchemyJobStore(url=os.environ.get('DATABASE_URL').replace('postgres', 'postgresql'))
+    'default': SQLAlchemyJobStore(url=db_url.replace('postgres', 'postgresql'))
 }
 executors = {
     'default': {'class': 'apscheduler.executors.asyncio:AsyncIOExecutor'}

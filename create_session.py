@@ -1,3 +1,4 @@
+from telethon.sessions import StringSession
 import os
 from telethon import TelegramClient
 
@@ -10,3 +11,5 @@ if not api_id or not api_hash:
 with TelegramClient('anon_main', int(api_id), api_hash) as client:
     client.loop.run_until_complete(client.send_message(
         'me', 'Hello, Session has been generated!'))
+    string = StringSession.save(client.session)
+    print(string)

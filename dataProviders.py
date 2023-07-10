@@ -26,7 +26,6 @@ async def getBitcoivaData(symbol):
     }
     async with aiohttp.ClientSession(base_url='https://rtrxastzeqsaoqd.bitcoiva.com', headers=headers) as session:
         response = await session.get(f'/trading/chart/history?symbol={symbol}&resolution={5}&from={from_time}&to={to_time}')
-        breakpoint()
         content = (await response.content.read()).decode()
         print(content)
         json_data = json.loads(content)

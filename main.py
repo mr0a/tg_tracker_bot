@@ -178,6 +178,7 @@ async def trackUnjoinedChannel(message: Message):
     if len(args) < 7:
         return message.reply("Invalid number of args! You need to send channel name and cron expression to track")
     channelName = args.pop(0)
+    logging.info(f"Track request for channel {channelName} received!")
     cron_expression = ' '.join(args)
     cron_seconds = args.pop(0)
     cron_minutes = args.pop(0)
@@ -188,7 +189,6 @@ async def trackUnjoinedChannel(message: Message):
 
     try:
         client = await getUserClient()
-        print("Got client", client)
         group = await client.get_peer_id(channelName)
     except ValueError as exc:
         await message.reply("Invalid channel name!")

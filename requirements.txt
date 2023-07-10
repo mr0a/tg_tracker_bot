@@ -4,3 +4,4 @@ tortoise-orm
 sqlalchemy
 psycopg2-binary
 asyncpg
+Telethon==1.28.5

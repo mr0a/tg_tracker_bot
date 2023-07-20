@@ -57,6 +57,8 @@ async def unjoinedChannelTrack(channel_name, chat_id):
     await tracker.save()
     for message in messages:
         assert isinstance(message, Message)
+        message_from = message.post_author | channel_name
+        await send_message(chat_id, "Message from " + message_from)
         if message.media:
             await send_message(chat_id, "This message has a file")
         if message.message:
